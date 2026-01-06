@@ -1,8 +1,14 @@
 import React from "react";
 
-export function PlaneIcon({className}: {className?:string}) {
+export function PlaneIcon({ className }: { className?: string }) {
+  // Extended viewBox: original height 1037.11, back section 567.31, 40% extension = 226.924
+  // New height: 1037.11 + 226.924 = 1264.034
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 659.54 1037.11" className={className}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 659.54 1264.03"
+      className={className}
+    >
       <defs>
         <style>
           {`
@@ -23,7 +29,7 @@ export function PlaneIcon({className}: {className?:string}) {
         <g id="Layer_1-2" data-name="Layer 1">
           <path
             className="cls-1"
-            d="M656.54,1034.11V466.8c-2-52.79-15.83-206.85-145-339.54C448.18,62.16,381.12,3,329.77,3S211.36,62.16,148,127.26C18.84,260,5.05,414,3,466.8v567.31"
+            d="M656.54,1261.03V466.8c-2-52.79-15.83-206.85-145-339.54C448.18,62.16,381.12,3,329.77,3S211.36,62.16,148,127.26C18.84,260,5.05,414,3,466.8v794.23"
           />
           <path
             className="cls-2"

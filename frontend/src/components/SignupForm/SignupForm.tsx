@@ -99,23 +99,29 @@ export function SignupForm() {
 
   const errMsg = ({error = " Wrong Email or Password."}) => {
     return (
-      <div className="bg-red-100 border text-sm border-red-400 text-red-700 mb-2 px-3 py-2 rounded relative flex" role="alert">
-        <span className="block sm:inline mx-1 font-semibold self-start">{error}</span>
+      <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-sm text-red-700 dark:text-red-400 px-4 py-3 rounded-lg relative flex items-center" role="alert">
+        <span className="block sm:inline font-medium">{error}</span>
       </div>
     );
   };
 
   return (
-    <div className="max-w-sm w-full mx-auto rounded-2xl p-3 md:p-5 shadow-input bg-white dark:bg-black self-center">
-      <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
-        Signup to Simplifly
-      </h2>
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-sky-50 via-white to-indigo-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
+      <div className="max-w-md w-full rounded-2xl p-6 md:p-8 shadow-2xl bg-white dark:bg-zinc-900 border border-neutral-200 dark:border-neutral-700">
+        <div className="text-center mb-6">
+          <h2 className="font-bold text-2xl md:text-3xl text-neutral-800 dark:text-neutral-200 mb-2">
+            Create Account
+          </h2>
+          <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            Signup to Simplifly
+          </p>
+        </div>
 
-      <form className="my-5" onSubmit={handleSubmit}>
+      <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
 
         {error && errMsg({error})}
 
-        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <LabelInputContainer>
             <Label htmlFor="firstname">First name</Label>
             <Input 
@@ -140,7 +146,7 @@ export function SignupForm() {
           </LabelInputContainer>
         </div>
 
-        <div className="flex flex-row space-y-0 space-x-2 mb-4">
+        <div className="flex flex-row gap-4">
           <LabelInputContainer>
             <Label htmlFor="gender">Gender</Label>
             <Btn text={gender} onClick={handleGenderChange} />
@@ -159,7 +165,7 @@ export function SignupForm() {
           </LabelInputContainer>
         </div>
 
-        <LabelInputContainer className="mb-4">
+        <LabelInputContainer>
           <Label htmlFor="email">Email Address</Label>
           <Input 
             id="email" 
@@ -170,7 +176,7 @@ export function SignupForm() {
             required= {true}
           />
         </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
+        <LabelInputContainer>
           <Label htmlFor="password">Password</Label>
           <Input
             id="password"
@@ -182,8 +188,8 @@ export function SignupForm() {
             required= {true}
           />
         </LabelInputContainer>
-        <LabelInputContainer className="mb-1">
-          <Label htmlFor="password">Re-Enter Password</Label>
+        <LabelInputContainer>
+          <Label htmlFor="re-password">Re-Enter Password</Label>
           <Input
             id="re-password"
             placeholder="••••••••" 
@@ -194,10 +200,10 @@ export function SignupForm() {
             required= {true}
           />
         </LabelInputContainer>
-        <LabelInputContainer className="mb-1">
-          <Label htmlFor="password">Card Number</Label>
+        <LabelInputContainer>
+          <Label htmlFor="card">Card Number</Label>
           <Input
-            id=""
+            id="card"
             placeholder="1234-xxxx-xxxx" 
             type="text"
             value={Card}
@@ -208,49 +214,50 @@ export function SignupForm() {
         </LabelInputContainer>
     
         <button
-          className=" mt-4 bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          className="mt-6 bg-gradient-to-br relative group/btn from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 block w-full text-white rounded-lg h-11 font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
           type="submit"
         >
           Signup
           <BottomGradient />
         </button>
 
-        <p className="mt-2 flex text-xs font-normal justify-self-start mx-2">
-            Already a Member?
+        <p className="mt-4 text-center text-sm text-neutral-600 dark:text-neutral-400">
+            Already a Member?{" "}
             <Link to="/login"
-                    className="text-indigo-500 hover:text-blue-600 hover:underline  font-semibold transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700 mx-1">
+                    className="text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 hover:underline font-semibold transition duration-150 ease-in-out">
                 Login
             </Link>
         </p>
 
-        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-6 h-[1px] w-full" />
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-neutral-300 dark:border-neutral-700"></div>
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-white dark:bg-zinc-900 px-2 text-neutral-500 dark:text-neutral-400">Or continue with</span>
+          </div>
+        </div>
 
-        <div className="flex flex-col space-y-4">
+        <div className="flex flex-col space-y-3">
           <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
+            className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-neutral-700 dark:text-neutral-300 rounded-lg h-11 font-medium bg-neutral-50 dark:bg-zinc-800 hover:bg-neutral-100 dark:hover:bg-zinc-700 border border-neutral-200 dark:border-neutral-700 transition-all duration-200"
+            type="button"
           >
-            <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              GitHub
-            </span>
-            <BottomGradient />
+            <IconBrandGithub className="h-5 w-5" />
+            <span className="text-sm">GitHub</span>
           </button>
           <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-gray-50 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
+            className="relative group/btn flex space-x-2 items-center justify-center px-4 w-full text-neutral-700 dark:text-neutral-300 rounded-lg h-11 font-medium bg-neutral-50 dark:bg-zinc-800 hover:bg-neutral-100 dark:hover:bg-zinc-700 border border-neutral-200 dark:border-neutral-700 transition-all duration-200"
+            type="button"
           >
-            <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-neutral-700 dark:text-neutral-300 text-sm">
-              Google
-            </span>
-            <BottomGradient />
+            <IconBrandGoogle className="h-5 w-5" />
+            <span className="text-sm">Google</span>
           </button>
         </div>
       </form>
 
       {loading && <LoadingModal />}
-
+      </div>
     </div>
   );
 }

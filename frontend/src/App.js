@@ -14,7 +14,8 @@ import { LoginAdmin } from "./components/loginAdmin/LoginAdmin"
 import { UpdateFlight } from "./screens/admin/UpdateFlight"
 import { Dashboard } from './screens/Dashboard/Dashboard'
 import Admin from './screens/admin/admin';
-
+import { AboutUs } from './screens/AboutUs/AboutUs';
+import { ContactUs } from './screens/ContactUs/ContactUs';
 import UploadProfileImagePage from "./screens/imgupload"
 
 
@@ -35,6 +36,8 @@ function App() {
           <Route path="admin/RegisterFlight" element={<RegisterFlight />}/>
           <Route path="admin/" element={<Admin />}/>
           <Route path="dashboard/" element={<Dashboard />}/>
+          <Route path="/AboutUs" element={<AboutUs />}/>
+          <Route path="/contactUs" element={<ContactUs />}/>
           <Route path="*" element={<NotFound />}/>
 
           <Route path="/img" element={<UploadProfileImagePage />}/>

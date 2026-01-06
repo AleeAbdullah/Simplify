@@ -200,8 +200,11 @@ export function FlightInfo() {
       {IsMessage == 1 && <SuccessMsg msg={message} Ismsg={setIsMessage} />}
 
       {loading && <LoadingModal />}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <Navbar />
+      </div>
       <div className="flex">
-        <div className="h-screen w-[380px] hover:w-[420px] overflow-hidden transform duration-700">
+        <div className="h-screen w-[380px] hover:w-[420px] overflow-hidden transform duration-700 flex-shrink-0 pl-8">
           <Seat_Picker
             seatGroups={seatGroupsArray.map((seatGroup) => ({
               name: seatGroup.name,
@@ -215,11 +218,11 @@ export function FlightInfo() {
             }))}
             SelectedSeats={SelectedSeats}
             SetSelectedSeats={SetSelectedSeats}
-            className="mx-6 pt-10 hover:pt-0 transform duration-700 hover:-translate-y-7"
+            className="h-full"
           />
         </div>
 
-        <div className="flex flex-col flex-1 mt-12 mx-8 p-8 rounded-lg border-2 overflow-y-auto h-[31rem]">
+        <div className="flex flex-col flex-1 my-12 mt-24 items-center justify-center mx-8 p-8 rounded-lg border-2 overflow-y-auto h-[31rem]">
           {/* ------------------------------ */}
           <div className="w-full flex flex-row justify-between mb-6">
             <div className="inline-flex items-center justify-start self-start">
@@ -339,7 +342,7 @@ export function FlightInfo() {
           </div>
 
           <div>
-            <div className="inline-flex items-center justify-start self-center my-3">
+            <div className="inline-flex items-center justify-start self-center my-3 text-nowrap">
               <IconReceipt2 className="h-5 w-5 text-neutral-500" />
               <Label className="text-lg text-neutral-700">
                 Booking Details:
@@ -348,8 +351,8 @@ export function FlightInfo() {
 
             <div className=" min-h-8 mx-14 py-auto  border-2 border-neutral-400 rounded-md">
               {SelectedSeats.map((seat, index) => (
-                <>
-                  <div key={index} className="text-base flex flex-row w-full">
+                <div key={index}>
+                  <div className="text-base flex flex-row w-full">
                     <div className="inline-flex items-center w-1/3 mx-2">
                       {`${seat.row}${seat.col}`}
                     </div>
@@ -363,9 +366,9 @@ export function FlightInfo() {
                     </div>
                   </div>
                   <div className="w-full h-[2px] my-1 bg-neutral-400"></div>
-                </>
+                </div>
               ))}
-              <div className="text-base flex flex-row w-full">
+              <div className="text-base flex flex-row w-full text-nowrap">
                 <div className="inline-flex items-center w-1/3 mx-2" />
                 <div className="inline-flex items-center self-center justify-end w-1/3 mx-2 font-medium">
                   Total =

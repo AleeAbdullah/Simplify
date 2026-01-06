@@ -125,7 +125,7 @@ export const DisplayFlights: React.FC<DisplayFlightsProps> = ({
       const formattedDate = isValidDate ? parsedDate.toLocaleDateString() : "";
 
       return (
-        <div className="p-4 rounded-lg shadow-md font-medium text-neutral-700 bg-gray-100 border px-4 py-4 flex mb-4 h-32"
+        <div className="p-4 rounded-xl shadow-lg font-medium text-neutral-700 bg-white dark:bg-zinc-800 border border-neutral-200 dark:border-neutral-700 px-4 py-4 flex mb-4 min-h-32 hover:shadow-xl transition-shadow duration-200"
         style={{textWrap:"nowrap"}}
         >
 
@@ -259,9 +259,25 @@ const StatusIcon = ({ status }: { status: string }) => {
 
 const Nodata = () => {
   return (
-      <div>
-          no flights found
+    <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+      <div className="mb-6 p-4 rounded-full bg-sky-100 dark:bg-sky-900/20">
+        <IconPlaneOff className="h-12 w-12 text-sky-600 dark:text-sky-400" />
       </div>
+      <h3 className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-2">
+        No Flights Found
+      </h3>
+      <p className="text-neutral-600 dark:text-neutral-400 max-w-md mb-4">
+        We couldn't find any flights matching your search criteria. Try adjusting your filters or search parameters.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-3 mt-4">
+        <button
+          onClick={() => window.location.reload()}
+          className="px-6 py-2 bg-sky-600 hover:bg-sky-700 text-white rounded-lg font-medium transition-colors duration-200"
+        >
+          Refresh Search
+        </button>
+      </div>
+    </div>
   )
 }
 

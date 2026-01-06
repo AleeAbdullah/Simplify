@@ -18,6 +18,7 @@ import {
 } from "@tabler/icons-react";
 import { DisplayFlights } from "../../components/DisplayList/DisplayList";
 import { Loading } from "../../components/Loading/Loading";
+import { Navbar } from "../../components/navbar/navbar";
 
 interface Booking {
     _id: string;
@@ -62,8 +63,8 @@ export function Dashboard() {
             title: "Profile",
             value: "Profile",
             content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-SoftGreen to-PaleBlue">
-                    <p className="text-green-950">Profile</p>
+                <div className="w-full overflow-y-auto relative h-full rounded-2xl p-6 md:p-10 bg-white dark:bg-zinc-900 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+                    <h2 className="text-2xl md:text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6">Profile</h2>
                     <Profile imageData={Img} token={token} msg={setMessage} Ismsg={setIsMessage} logout={logout} navigate={navigate}/>
                 </div>
             ),
@@ -72,8 +73,8 @@ export function Dashboard() {
             title: "Bookings",
             value: "Bookings",
             content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl font-bold text-white bg-gradient-to-br from-SoftGreen to-PaleBlue">
-                    <p className="text-xl md:text-4xl text-green-950 z-30 mt-8">Your Bookings</p>
+                <div className="w-full overflow-y-auto relative h-full rounded-2xl p-6 md:p-10 bg-white dark:bg-zinc-900 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+                    <h2 className="text-2xl md:text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6">Your Bookings</h2>
                     <Bookings token={token}/>
                 </div>
             ),
@@ -82,8 +83,8 @@ export function Dashboard() {
             title: "Security",
             value: "Security",
             content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-SoftGreen to-PaleBlue">
-                    <p className="text-green-950">Change Password</p>
+                <div className="w-full overflow-y-auto relative h-full rounded-2xl p-6 md:p-10 bg-white dark:bg-zinc-900 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+                    <h2 className="text-2xl md:text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6">Change Password</h2>
                     <Security token={token} msg={setMessage} Ismsg={setIsMessage} />
                 </div>
             ),
@@ -92,8 +93,8 @@ export function Dashboard() {
             title: "Offers",
             value: "Offers",
             content: (
-                <div className="w-full overflow-hidden relative h-full rounded-2xl p-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br from-purple-700 to-violet-900">
-                    <p>Content tab</p>
+                <div className="w-full overflow-y-auto relative h-full rounded-2xl p-6 md:p-10 bg-white dark:bg-zinc-900 border border-neutral-200 dark:border-neutral-700 shadow-lg">
+                    <h2 className="text-2xl md:text-3xl font-bold text-neutral-800 dark:text-neutral-200 mb-6">Special Offers</h2>
                     <DummyContent />
                 </div>
             ),
@@ -101,21 +102,27 @@ export function Dashboard() {
     ];
 
     return (
-        <div className={cn("h-[33.5rem] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full  items-start justify-start px-10", TabclassName)}>
-            {isloggedin && <Tabs tabs={tabs} />}
+        <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-indigo-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900">
+            <Navbar />
+            <div className="pt-24 pb-16 px-4 md:px-8">
+                <div className={cn("min-h-[600px] [perspective:1000px] relative flex flex-col max-w-5xl mx-auto w-full items-start justify-start", TabclassName)}>
+                    {isloggedin && <Tabs tabs={tabs} contentClassName="h-[600px]" />}
 
-            {!isloggedin && (
-                <div className="h-full w-full flex flex-col content-center justify-center">
-                    <p className="text-lg text-slate-900"> You are not logged In. </p>
-                    <div className="w-1/3 flex justify-center mt-6 self-center">
-                        <Button displayName="Login" route="/login" />
-                    </div>
+                    {!isloggedin && (
+                        <div className="h-full w-full flex flex-col items-center justify-center py-32">
+                            <div className="text-center">
+                                <p className="text-xl font-semibold text-neutral-800 dark:text-neutral-200 mb-4">You are not logged in</p>
+                                <div className="flex justify-center">
+                                    <Button displayName="Login" route="/login" />
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {(IsMessage == 2) && <ErrMsg msg={message} Ismsg={setIsMessage} />}
+                    {(IsMessage == 1) && <SuccessMsg msg={message} Ismsg={setIsMessage} />}
                 </div>
-            )}
-
-            {(IsMessage == 2) && <ErrMsg msg={message} Ismsg={setIsMessage} />}
-            {(IsMessage == 1) && <SuccessMsg msg={message} Ismsg={setIsMessage} />}
-
+            </div>
         </div>
     );
 }
@@ -227,25 +234,26 @@ const Profile = ({
     }, []);
 
     return (
-        <div className="mt-10">
-            <div className="flex flex-row">
-                <div className="h-48 w-56">
+        <div className="mt-6">
+            <div className="flex flex-col md:flex-row gap-6">
+                <div className="flex flex-col items-center md:items-start">
                     <img
                         src={`data:image/png;base64,${imageData}`}
                         alt="Profile"
-                        className="rounded-full shadow-md ring-2 ring-green-950"
+                        className="rounded-full shadow-lg ring-4 ring-sky-200 dark:ring-sky-800 w-48 h-48 object-cover mb-4"
                     />
 
-                    <Btn
-                        text="Change Image"
+                    <button
                         onClick={() => SetChangeImage(true)}
-                        className="mt-6"
-                    />
+                        className="px-4 py-2 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 hover:bg-neutral-50 dark:hover:bg-zinc-700 text-neutral-700 dark:text-neutral-300 rounded-lg font-medium transition-colors"
+                    >
+                        Change Image
+                    </button>
 
                     {ChangeImage && <UploadProfileImage />}
 
                 </div>
-                <div className="flex flex-col flex-1 ms-3">
+                <div className="flex flex-col flex-1">
                     <div className="flex flex-row space-x-4 mb-6">
                         <LabelInputContainer>
                             <Label htmlFor="firstname">First name</Label>
@@ -302,28 +310,31 @@ const Profile = ({
                             />
                         </LabelInputContainer>
                     </div>
-                    <div className="flex justify-end mr-7 space-x-7">
-                        <Btn
-                            text="Logout"
-                            onClick={ () => {logout() && navigate("/")} }
-                            className="w-fit px-7 rounded-lg self-end flex"
-                        />
+                    <div className="flex justify-end mr-7 space-x-4 mt-6">
+                        <button
+                            onClick={() => {logout() && navigate("/")}}
+                            className="px-6 py-2 border-2 border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg font-medium transition-colors"
+                        >
+                            Logout
+                        </button>
 
                         {
                             !ChangeInfo &&
-                            <Btn
-                                text="Edit"
+                            <button
                                 onClick={() => { SetChangeInfo(true) }}
-                                className="w-fit px-7 rounded-lg self-end flex"
-                            />
+                                className="px-6 py-2 bg-gradient-to-br from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                            >
+                                Edit
+                            </button>
                         }
                         {
                             ChangeInfo &&
-                            <Btn
-                                text="Save Changes"
+                            <button
                                 onClick={() => { UpdateDetails() }}
-                                className="w-fit px-7 rounded-lg self-end flex"
-                            />
+                                className="px-6 py-2 bg-gradient-to-br from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                            >
+                                Save Changes
+                            </button>
                         }
                     </div>
                 </div>
@@ -360,7 +371,7 @@ const Security = ({ token, msg, Ismsg }: { token: string, msg: Function, Ismsg: 
 
     return (
         <div className="flex w-full justify-center">
-            <div className="w-1/2 flex flex-col justify-center mt-8 self-center">
+            <div className="w-full max-w-md flex flex-col justify-center mt-8">
                 <div>
                     <LabelInputContainer className="mb-4">
                         <Label htmlFor="currentPassword">Current Password:</Label>
@@ -395,11 +406,12 @@ const Security = ({ token, msg, Ismsg }: { token: string, msg: Function, Ismsg: 
                     </LabelInputContainer>
                 </div>
 
-                <Btn
+                <button
                     onClick={handleChangePassword}
-                    text="Change Password"
-                    className="w-1/2 self-center"
-                ></Btn>
+                    className="w-full mt-4 bg-gradient-to-br from-sky-600 to-indigo-600 hover:from-sky-700 hover:to-indigo-700 text-white rounded-lg h-11 font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                >
+                    Change Password
+                </button>
             </div>
         </div>
     );
@@ -496,30 +508,48 @@ const Bookings = ({ token }: { token: string }) => {
     
 
     return (
-        <div className="m-4 mt-12 pb-28 h-full overflow-auto scrollbar-hide">
+        <div className="pb-8 overflow-auto" style={{ scrollbarWidth: "none", msOverflowStyle: "none", maxHeight: "calc(600px - 8rem)" }}>
             {Isloading && <LoadingModal />}
-            {notFound && <div className="h-full w-full items-center justify-center text-2xl font-bold text-teal-950"> {notFoundMsg} </div>}
+            {notFound && (
+                <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+                    <div className="mb-6 p-4 rounded-full bg-sky-100 dark:bg-sky-900/20">
+                        <p className="text-2xl font-bold text-neutral-800 dark:text-neutral-200">{notFoundMsg}</p>
+                    </div>
+                </div>
+            )}
+            {!notFound && bookings && bookings.length === 0 && (
+                <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
+                    <div className="mb-6 p-4 rounded-full bg-sky-100 dark:bg-sky-900/20">
+                        <p className="text-lg font-semibold text-neutral-800 dark:text-neutral-200">No bookings found</p>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2">You haven't made any bookings yet</p>
+                    </div>
+                </div>
+            )}
             {
                 bookings?.map((booking) => (
-                    <div className="flex flex-col">
-                        <div className="px-4 rounded-lg shadow-md font-medium text-neutral-700 bg-white border border-gray-100 py-2 flex h-12 space-x-4 items-center">
-                            <div className="flex flex-row">
-                                Seat Type: <p className="font-normal pl-2">{booking.group_name}</p>
+                    <div key={booking._id} className="flex flex-col mb-6">
+                        <div className="px-6 py-4 rounded-xl shadow-lg font-medium text-neutral-700 dark:text-neutral-300 bg-gradient-to-r from-sky-50 to-indigo-50 dark:from-sky-900/20 dark:to-indigo-900/20 border border-sky-200 dark:border-sky-800 flex flex-wrap gap-4 items-center justify-between">
+                            <div className="flex flex-row items-center gap-2">
+                                <span className="font-semibold text-neutral-800 dark:text-neutral-200">Seat Type:</span>
+                                <span className="text-neutral-600 dark:text-neutral-400">{booking.group_name}</span>
                             </div>
-                            <div className="flex flex-row">
-                                Seat ID: <p className="font-normal pl-2">{booking.row + booking.col}</p>
+                            <div className="flex flex-row items-center gap-2">
+                                <span className="font-semibold text-neutral-800 dark:text-neutral-200">Seat ID:</span>
+                                <span className="text-neutral-600 dark:text-neutral-400">{booking.row}{booking.col}</span>
                             </div>
                             <button
-                                className="flex border ml-12 px-2 py-1 border-red-400 bg-red-200 rounded-lg"
+                                className="px-4 py-2 border border-red-300 dark:border-red-700 bg-red-100 dark:bg-red-900/30 hover:bg-red-200 dark:hover:bg-red-900/40 text-red-700 dark:text-red-400 rounded-lg font-medium transition-colors"
                                 onClick={() => {cancel(booking._id)}}
                             >
                                 Cancel Booking
                             </button>
                         </div>
-                        <DisplayFlights
-                            data= {[booking.flightData]}
-                            Isloading={false}
-                        />
+                        <div className="mt-2">
+                            <DisplayFlights
+                                data={[booking.flightData]}
+                                Isloading={false}
+                            />
+                        </div>
                     </div>
                 ))
             }
@@ -543,26 +573,26 @@ const LabelInputContainer = ({
 
 const Btn = ({ text, onClick, className, id = "FlightType", name = "FlightType", value }: { text: string; onClick?: () => void; className?: string; id?: string; name?: string; value?: string }) => {
     return (
-        <span
-            className={cn("flex h-10 w-full border-none bg-gray-50 dark:bg-zinc-800 dark:text-white shadow-input rounded-md px-3 py-2 placeholder:text-neutral-400 dark:placeholder-text-neutral-600 focus-visible:outline-none focus-visible:ring-[2px] focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-600 disabled:cursor-not-allowed disabled:opacity-50 dark:shadow-[0px_0px_1px_1px_var(--neutral-700)] group-hover/input:shadow-none transition duration-400 items-center text-lg font-medium text-gray-600 hover:ring-2 cursor-pointer self-end mt-1 justify-center", className)}
+        <button
+            type="button"
+            className={cn("flex h-10 w-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-zinc-800 text-neutral-700 dark:text-neutral-300 shadow-sm rounded-lg px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 dark:focus-visible:ring-sky-400 disabled:cursor-not-allowed disabled:opacity-50 hover:bg-neutral-50 dark:hover:bg-zinc-700 transition-all duration-200 items-center text-sm font-medium cursor-pointer justify-center", className)}
             onClick={onClick}
-            style={{ transition: "all 0.3s" }}
             id={id}
         >
             {text}
-        </span>
+        </button>
     );
 };
 
 const ErrMsg = ({ msg = " Wrong Email or Password.", Ismsg }: { msg: String, Ismsg: Function }) => {
     return (
-        <div className="absolute top-0 right-0 mt-4 mr-4">
+        <div className="fixed top-24 right-4 z-50">
             <div
-                className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative min-w-52 flex"
+                className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 px-4 py-3 rounded-lg relative min-w-52 flex items-center gap-3 shadow-lg"
                 role="alert"
             >
-                <strong className="font-semibold">{msg}</strong>
-                <button className="pl-6" onClick={() => { Ismsg(0) }}>
+                <strong className="font-medium flex-1">{msg}</strong>
+                <button className="hover:bg-red-100 dark:hover:bg-red-900/30 rounded p-1 transition-colors" onClick={() => { Ismsg(0) }}>
                     <IconX className="h-4 w-4" />
                 </button>
             </div>
@@ -573,10 +603,10 @@ const ErrMsg = ({ msg = " Wrong Email or Password.", Ismsg }: { msg: String, Ism
 
 const SuccessMsg = ({ msg = "Success!!", Ismsg }: { msg: String, Ismsg: Function }) => {
     return (
-        <div className="absolute top-0 right-0 mt-4 mr-4">
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative flex min-w-52" role="alert">
-                <strong className="font-semibold">{msg}</strong>
-                <button className="pl-6" onClick={() => { Ismsg(0) }}>
+        <div className="fixed top-24 right-4 z-50">
+            <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 px-4 py-3 rounded-lg relative flex items-center gap-3 min-w-52 shadow-lg" role="alert">
+                <strong className="font-medium flex-1">{msg}</strong>
+                <button className="hover:bg-green-100 dark:hover:bg-green-900/30 rounded p-1 transition-colors" onClick={() => { Ismsg(0) }}>
                     <IconX className="h-4 w-4" />
                 </button>
             </div>
