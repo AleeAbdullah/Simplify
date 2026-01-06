@@ -37,4 +37,6 @@ app.use(errHandler);
 
 const PORT = process.env.PORT || 4000;
 
-app.listen(5000, console.log(`server started on port ${PORT}`))
+app.listen(PORT, () => {
+    console.log(`server started on port ${PORT}`)
+})

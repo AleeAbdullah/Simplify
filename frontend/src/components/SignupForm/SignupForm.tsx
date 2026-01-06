@@ -10,6 +10,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Loading } from "../Loading/Loading";
+import { getApiUrl } from "../../config/api";
 import BottomGradient from "../ui/BottomGradient"
 import { useAuth } from "../../auth/auth"
 
@@ -58,7 +59,7 @@ export function SignupForm() {
       SetLoading(true);
 
       const data = await axios.post(
-        "http://127.0.0.1:5000/api/users/register", 
+        getApiUrl("api/users/register"), 
         {
           FirstName: firstName,
           LastName: lastName,

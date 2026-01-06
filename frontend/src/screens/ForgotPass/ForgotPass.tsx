@@ -6,6 +6,7 @@ import { cn } from "../../utils/cn";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Loading } from "../../components/Loading/Loading";
+import { getApiUrl } from "../../config/api";
 
 export function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ export function ForgotPasswordForm() {
       setLoading(true);
 
       const { data } = await axios.post(
-        "http://127.0.0.1:5000/api/users/forgotPassword",
+        getApiUrl("api/users/forgotPassword"),
         {
           "Email": email,
         },

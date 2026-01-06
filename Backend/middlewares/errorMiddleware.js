@@ -1,6 +1,6 @@
 const NotFound = (req, res, next) => {
-    const error = new Error (`not found ${req.orignalUrl}`);
-    res.status(400);
+    const error = new Error(`not found ${req.originalUrl}`);
+    res.status(404);
     next(error);
 }
 
@@ -9,7 +9,7 @@ const errHandler = (err, req, res, next) => {
     res.status(statusCode);
     res.json({
         message: err.message,
-        stack: process.env.NODE_ENV === "production" ? NULL : err.stack,
+        stack: process.env.NODE_ENV === "production" ? null : err.stack,
     });
 }
 

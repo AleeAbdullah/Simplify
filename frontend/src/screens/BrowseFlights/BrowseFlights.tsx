@@ -6,6 +6,7 @@ import { cn } from "../../utils/cn";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Loading } from "../../components/Loading/Loading";
+import { getApiUrl } from "../../config/api";
 import BottomGradient from "../../components/ui/BottomGradient";
 import { isErrored } from "stream";
 import { DisplayFlights } from "../../components/DisplayList/DisplayList";
@@ -178,7 +179,7 @@ export function BrowseFlights() {
       SetLoading(true);
   
       const { data } = await axios.post(
-        "http://127.0.0.1:5000/api/flights/getFilteredFlights", 
+        getApiUrl("api/flights/getFilteredFlights"), 
         jsonData
         ,
         config

@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 async function uploadToMongo() {
     try {
         // Read the CSV file
-        fs.createReadStream('C:/Users/Lenovo/Desktop/Simplify/Backend/data/flight_schedule.csv')
+        fs.createReadStream(__dirname + '/../data/flight_schedule.csv')
             .pipe(csv())
             .on('data', async (row) => {
                 // Extract seat group data from the row

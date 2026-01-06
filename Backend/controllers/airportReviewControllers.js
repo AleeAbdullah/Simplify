@@ -28,7 +28,7 @@ const createReview = asyncHandler(async (req, res) => {
 
 // Get all reviews for a specific airport
 const getReviewsByAirport = asyncHandler(async (req, res) => {
-    const { airportId } = req.params.code;
+    const { airportId } = req.params;
 
     const reviews = await AirportReview.find({ airport: airportId });
 

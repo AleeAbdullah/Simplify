@@ -11,6 +11,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Loading } from "../Loading/Loading";
+import { getApiUrl } from "../../config/api";
 import BottomGradient from "../ui/BottomGradient";
 import { useAuth } from "../../auth/auth"
 import { response } from "express";
@@ -65,7 +66,7 @@ export function LoginForm() {
       SetLoading(true);
   
       const data  = await axios.post(
-        "http://127.0.0.1:5000/api/users/login", 
+        getApiUrl("api/users/login"), 
         {
           "Email" : email,
           "Password": password

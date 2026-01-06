@@ -9,6 +9,7 @@ import {
   } from "@tabler/icons-react";
 import { UpdateFlight } from './UpdateFlight';
 import axios from "axios";
+import { getApiUrl } from "../../config/api";
 
 
 const Admin = (props) => {
@@ -29,7 +30,7 @@ const Admin = (props) => {
               }
 
             const { data } = await axios.post(
-                `http://127.0.0.1:5000/api/flights/Flightexists/${ID}`, 
+                getApiUrl(`api/flights/Flightexists/${ID}`), 
                 {},
                 config
             );

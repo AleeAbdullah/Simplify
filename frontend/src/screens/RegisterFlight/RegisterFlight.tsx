@@ -1,6 +1,7 @@
     import React, { useState, useEffect } from 'react';
     import axios from 'axios';
     import { Label } from "../../components/ui/label";
+    import { getApiUrl } from "../../config/api";
     import { Input } from "../../components/ui/input";
     import { cn } from '../../utils/cn';
 
@@ -50,7 +51,7 @@
             // Fetch existing flight IDs when the component mounts
             const fetchFlightIDs = async () => {
                 try {
-                    const response = await axios.post('/api/flights/getflights');
+                    const response = await axios.post(getApiUrl('api/flights/getflights'));
                     const flights: Flight[] = response.data;
                     const existingIDs = flights.map(flight => flight.FlightID);
                     if (existingIDs.length > 0) {
@@ -152,7 +153,7 @@
 
             e.preventDefault();
             try {
-                const response = await axios.post('/api/flights/create', formData);
+                const response = await axios.post(getApiUrl('api/flights/create'), formData);
                 console.log(response.data);
                 alert('Flight data uploaded successfully!');
             } catch (error: any) {

@@ -8,6 +8,7 @@ import { useAuth } from "../../auth/auth";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/button/button";
 import axios from "axios";
+import { getApiUrl } from "../../config/api";
 import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
 import { cn } from "../../utils/cn"
@@ -165,7 +166,7 @@ const Profile = ({
             };
 
             const data = await axios.post(
-                "http://localhost:5000/api/users/updateDetails",
+                getApiUrl("api/users/updateDetails"),
                 {
                     'token': token,
                     "FirstName": FirstName,
@@ -200,7 +201,7 @@ const Profile = ({
                 };
 
                 const data = await axios.post(
-                    "http://localhost:5000/api/users/getDetails",
+                    getApiUrl("api/users/getDetails"),
                     {
                         'token': token,
                     },
@@ -344,7 +345,7 @@ const Security = ({ token, msg, Ismsg }: { token: string, msg: Function, Ismsg: 
                 Ismsg(2);
                 return;
             }
-            const response = await axios.post("http://localhost:5000/api/users/ChangePassword", {
+            const response = await axios.post(getApiUrl("api/users/ChangePassword"), {
                 newPassword,
                 token,
                 currentPassword
@@ -422,7 +423,7 @@ const Bookings = ({ token }: { token: string }) => {
             };
 
             const response = await axios.post(
-                'http://localhost:5000/api/bookedFlights/getallbyuser',
+                getApiUrl('api/bookedFlights/getallbyuser'),
                 {
                     "token": token,
                 },
@@ -438,7 +439,7 @@ const Bookings = ({ token }: { token: string }) => {
             const bookingsWithFlightData: Booking[] = [];
             for (const booking of bookingData) {
                 const flightResponse = await axios.post(
-                    `http://localhost:5000/api/flights/getFlightById/${booking.FlightID}`
+                    getApiUrl(`api/flights/getFlightById/${booking.FlightID}`)
                 );
                 const flightData = flightResponse.data;
                 const bookingWithFlightData: Booking = { ...booking, flightData };
@@ -476,7 +477,7 @@ const Bookings = ({ token }: { token: string }) => {
             };
 
             const response = await axios.post(
-                'http://localhost:5000/api/bookedFlights/cancel',
+                getApiUrl('api/bookedFlights/cancel'),
                 {
                     "id": id,
                 },

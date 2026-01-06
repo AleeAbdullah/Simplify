@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../auth/auth";
+import { getApiUrl } from "../config/api";
 
 const UploadProfileImage = () => {
   const [image, setImage] = useState(null);
@@ -31,7 +32,7 @@ const UploadProfileImage = () => {
                 console.log(token);
                 
                 const response = await axios.post(
-                    "http://127.0.0.1:5000/api/users/imgUpload", 
+                    getApiUrl("api/users/imgUpload"), 
                     {
                     token: token,
                     Img: base64Image,

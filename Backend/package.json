@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon Backend/server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "author": "Ali Abdullah",
   "license": "ISC",
@@ -17,7 +18,7 @@
     "express": "^4.18.3",
     "express-async-handler": "^1.2.0",
     "fs": "^0.0.1-security",
-    "jsonwebtoken": "^9.0.2",
+    "jsonwebtoken": "^9.0.3",
     "mongodb": "^6.5.0",
     "mongoose": "^8.2.3",
     "nodemailer": "^6.9.12",

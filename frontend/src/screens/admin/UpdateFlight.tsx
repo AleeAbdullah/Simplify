@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Label } from "../../components/ui/label";
+import { getApiUrl } from "../../config/api";
 import { Input } from "../../components/ui/input";
 import { cn } from '../../utils/cn';
 
@@ -93,7 +94,7 @@ export const UpdateFlight = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`/api/flights/update/${FlightID}`, {
+            const response = await axios.post(getApiUrl(`api/flights/update/${FlightID}`), {
                 Date: formData.Date,
                 DepartureCity: formData.DepartureCity,
                 DestinationCity: formData.DestinationCity,
@@ -120,7 +121,7 @@ export const UpdateFlight = () => {
         const fetchFlightData = async () => {
             try {
                 console.log("formData")
-                const response = await axios.post(`/api/flights/getFlightById/${params.FlightID}`);
+                const response = await axios.post(getApiUrl(`api/flights/getFlightById/${params.FlightID}`));
                 const flightData: FlightFormData = response.data;
                 
                 console.log(flightData)

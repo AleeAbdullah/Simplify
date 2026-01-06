@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { cn } from "../../utils/cn";
+import { getApiUrl } from "../../config/api";
 import React, { useEffect, useState } from "react";
 import { BentoGridItem } from "../ui/grid-comp";
 import { motion } from "framer-motion";
@@ -45,7 +46,7 @@ export function GridItems() {
       SetLoading(true);
   
       const { data } = await axios.post(
-        "http://127.0.0.1:5000/api/flights/getFilteredFlights", 
+        getApiUrl("api/flights/getFilteredFlights"), 
          jsonData
         ,
         config
@@ -79,7 +80,7 @@ export function GridItems() {
       SetLoading(true);
   
       const { data } = await axios.post(
-        "http://127.0.0.1:5000/api/flights/getFilteredFlights", 
+        getApiUrl("api/flights/getFilteredFlights"), 
         {
 
         },

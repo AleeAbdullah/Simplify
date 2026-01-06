@@ -175,14 +175,14 @@ const deleteFlight = asyncHandler(async (req, res) => {
 
     const { FlightID } = req.params;
 
-    const flight = await Flight.find({FlightID});
+    const flight = await Flight.findOne({FlightID});
 
     if (!flight) {
         res.status(404);
         throw new Error("Flight not found");
     }
 
-    await flight.remove();
+    await Flight.findOneAndDelete({FlightID});
     res.json({ message: "Flight removed" });
 });
 
