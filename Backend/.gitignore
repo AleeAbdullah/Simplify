@@ -1,2 +1,5 @@
 node_modules
-_templates 
+_templates
+.env
+.env.local
+*.log 

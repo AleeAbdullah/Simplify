@@ -17,8 +17,10 @@ app.use(cors());
 
 app.use(express.json());
 
-// Connect to database
-connectDB();
+// Connect to database (optimized for serverless - reuses connection)
+connectDB().catch(err => {
+    console.error("Database connection error:", err);
+});
 
 app.get("/", (req, res) => {
     res.send("API is running...");

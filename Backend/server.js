@@ -17,8 +17,13 @@ var cors = require('cors')
 app.use(cors())
 
 dotenv.config();
-connectDB();
 app.use(express.json());
+
+// Connect to database
+connectDB().catch(err => {
+    console.error("Database connection error:", err);
+    process.exit(1);
+});
 
 
 
